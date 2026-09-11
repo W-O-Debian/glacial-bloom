@@ -6478,6 +6478,216 @@ Style Settings plugin.
   --hl2: rgba(220, 38, 38, 0.25);
   --sp1: #f0f9ff;
 }
+
+/* ==========================================================================
+   Glacial Bloom v1.2.0 — Feature additions
+   ==========================================================================
+
+   1. PDF Export styling (@media print)
+      Forces background colors to print, hides UI chrome, sets proper page
+      margins. Produces beautiful theme-colored PDFs.
+
+   2. Custom syntax highlighting
+      Palette-tuned code colors — keywords in cyan, strings in frosted
+      emerald, comments in slate, numbers in warm red, functions in purple.
+
+   3. Graph view color preset
+      Matches the graph view to the Glacial Bloom palette.
+   ========================================================================== */
+
+
+/* 1. PDF Export styling ------------------------------------------------- */
+
+@media print {
+  /* Force background colors and images to print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Hide all UI chrome */
+  .workspace-ribbon,
+  .workspace-split.mod-left-split,
+  .workspace-split.mod-right-split,
+  .workspace-tab-header-container,
+  .status-bar,
+  .view-header,
+  .view-actions,
+  .titlebar,
+  .sidebar-toggle-button,
+  .workspace-tab-header-status-icon,
+  .markdown-source-view .cm-gutters,
+  .markdown-embed-link,
+  .file-embed-link {
+    display: none !important;
+  }
+
+  /* Use the theme background for the whole page */
+  html, body, .app-container, .workspace, .workspace-split.mod-root {
+    background: var(--bg1) !important;
+    color: var(--tx1) !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* The actual note content — centered with print margins */
+  .markdown-preview-view,
+  .markdown-source-view,
+  .markdown-rendered {
+    background: var(--bg1) !important;
+    color: var(--tx1) !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    max-width: 16cm !important;
+    width: 100% !important;
+    font-size: 11pt !important;
+    line-height: 1.6 !important;
+  }
+
+  .markdown-preview-sizer,
+  .cm-sizer {
+    max-width: 16cm !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Page margins */
+  @page {
+    margin: 2cm;
+  }
+
+  /* Headings — avoid orphaned headings at page bottom */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+    color: var(--tx1) !important;
+  }
+
+  /* Avoid breaking inside these elements */
+  pre, blockquote, table, figure, .callout {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Code blocks — preserve background */
+  pre, code {
+    background: var(--bg2) !important;
+    color: var(--tx4) !important;
+  }
+
+  pre {
+    padding: 0.8em !important;
+    border: 1px solid var(--ui1) !important;
+    border-radius: 3px !important;
+    font-size: 9.5pt !important;
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+  }
+
+  /* Callouts — preserve styling */
+  .callout {
+    background: var(--bg2) !important;
+    border-left: 3px solid var(--ax1) !important;
+    padding: 0.6em 1em !important;
+    margin: 0.8em 0 !important;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    border-left: 2px solid var(--ui2) !important;
+    color: var(--tx2) !important;
+    padding-left: 1em !important;
+    margin: 0.8em 0 !important;
+  }
+
+  /* Tables */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 10pt !important;
+  }
+
+  th, td {
+    border: 1px solid var(--ui1) !important;
+    padding: 0.4em 0.6em !important;
+  }
+
+  th {
+    background: var(--bg2) !important;
+    color: var(--tx2) !important;
+  }
+
+  /* Links — keep accent color but don't underline */
+  a {
+    color: var(--ax1) !important;
+    text-decoration: none !important;
+  }
+
+  /* Highlights — preserve the signature warm red bloom */
+  mark {
+    background: var(--hl2) !important;
+    color: var(--tx1) !important;
+    padding: 0.1em 0.2em !important;
+  }
+
+  /* Tags */
+  .tag {
+    color: var(--ax1) !important;
+    border: 1px solid var(--ui2) !important;
+    background: transparent !important;
+  }
+
+  /* Images — fit within page width */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+}
+
+
+/* 2. Custom syntax highlighting ---------------------------------------- */
+
+/* Glacial Bloom syntax colors — tuned to the palette */
+.theme-dark, .theme-light {
+  --code-comment: var(--tx3);
+  --code-function: #818cf8;
+  --code-keyword: var(--ax1);
+  --code-important: #ef4444;
+  --code-operator: var(--tx2);
+  --code-property: #34d399;
+  --code-punctuation: var(--tx2);
+  --code-string: #34d399;
+  --code-tag: #ef4444;
+  --code-value: #fbbf24;
+}
+
+.theme-dark {
+  --code-background: var(--bg2);
+  --code-normal: var(--tx1);
+}
+
+.theme-light {
+  --code-background: var(--bg3);
+  --code-normal: var(--tx1);
+}
+
+
+/* 3. Graph view color preset ------------------------------------------- */
+
+.theme-dark, .theme-light {
+  --graph-line: var(--ui1);
+  --graph-node: var(--tx1);
+  --graph-node-tag: var(--ax1);
+  --graph-node-attachment: var(--color-orange);
+  --graph-node-focused: var(--ax2);
+  --graph-node-unresolved: var(--tx3);
+}
+
 /* Plugin compatibility */
 
 /* @plugins

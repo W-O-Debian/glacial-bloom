@@ -99,6 +99,12 @@ Because Glacial Bloom is a Minimal recolour, you inherit the full Minimal featur
 - **Plugin compatibility** — Calendar, Charts, Dataview, Git, Kanban, Style Settings, Zoom, and more
 - **14 preset color schemes** — Dracula, Gruvbox, Nord, Solarized, Catppuccin, and more (Minimal's presets remain selectable for comparison)
 
+### New in v1.2.0
+
+- **PDF Export styling** — Obsidian's "Export to PDF" now produces beautiful theme-colored PDFs with proper page margins, preserved callouts, and the signature warm red bloom on highlights.
+- **Custom syntax highlighting** — code blocks now use palette-tuned colors (keywords in cyan, strings in frosted emerald, comments in slate, functions in icy lavender).
+- **Graph view preset** — the graph view now matches the Glacial Bloom palette instead of using Obsidian's defaults.
+
 ## What changed from Minimal
 
 Only color values were changed. Specifically:
